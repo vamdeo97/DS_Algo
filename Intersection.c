@@ -64,7 +64,18 @@ void Intersection(struct node*head1,struct node*head2,struct node**head3)
 	{
 		if(head1->num==head2->num)
 		{
-			insert(head3,head2->num);
+			struct node*newnode=(struct node*)malloc(sizeof(struct node));
+			newnode->num=head2->num;
+			newnode->n=NULL;
+			if(prev==NULL)
+			{
+				(*head3)=newnode;
+			}
+			else
+			{
+				prev->n=newnode;
+			}
+			prev=newnode;
 			head1=head1->n;
 			head2=head2->n;
 			flag=0;
@@ -82,8 +93,6 @@ void Intersection(struct node*head1,struct node*head2,struct node**head3)
 	printf("\nNO INTERSECTION FOUND:\n");
 	
 }
-
-	
 
 int main(void)
 {
