@@ -56,8 +56,9 @@ void print(struct node*head)
 void Segregate_even_odd(struct node**head)
 {
 	struct node*head_node=(*head);
-	struct node*head1=NULL;
+	struct node*head1=NULL,*h1;
 	struct node*head2=NULL;
+	struct node*tail1;
 	int num1;
 	
 	while(head_node!=NULL)
@@ -74,10 +75,22 @@ void Segregate_even_odd(struct node**head)
 		}
 		head_node=head_node->n;
 	}
+	
 	printf("\nSegreagation_odd\n");
 	print(head1);
 	printf("\nSegreagation_even\n");
 	print(head2);
+	h1=head1;
+	
+	while(head1->n!=NULL)
+	{
+		head1=head1->n;
+	}
+	
+	tail1=head1;
+	tail1->n=head2;
+	printf("\nSEGRGATED LINKLIST:\n");
+	print(h1);
 }
 
 int main(void)
