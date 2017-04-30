@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-// Creation of Binary Search Tree
+// Creation of a Binary Search Tree
 struct node
 {
 	int num;
@@ -19,7 +19,7 @@ struct node* Newnode(int data)
 	return(newnode);
 }
 
-// Insert element in a tree
+// Insert an element in a Tree
 struct node* insert(struct node*root,int num)
 {
 	struct node*root_node=root;
@@ -39,7 +39,7 @@ struct node* insert(struct node*root,int num)
 	return(root_node);
 }
 
-// Searching an Element in a tree
+// Searching an Element in a Tree
 int search(struct node*root,int num)
 {
 	if(root==NULL)
@@ -55,7 +55,7 @@ int search(struct node*root,int num)
 		return(search(root->right,num));
 }
 
-// Find Minimum Element in a BST
+// Find Min Element in a BST
 int FindMin(struct node*root)
 {
 	if(root==NULL)
@@ -69,7 +69,33 @@ int FindMin(struct node*root)
 	return(root->num);
 }
 
-// Find MAX Element in a BST
+int FindMin_recursive(struct node*root)
+{
+	if(root==NULL)
+	{
+		printf("\nTree Empty\n");
+		return(-1);
+	}
+	while(root->left==NULL)
+		return(root->num);
+
+	FindMin_recursive(root->left);
+}
+
+int FindMax_recursive(struct node*root)
+{
+	if(root==NULL)
+	{
+		printf("\nTree empty\n");
+		return(-1);
+	}
+	while(root->right==NULL)
+		return(root->num);
+
+	FindMax_recursive(root->right);
+}
+
+// Find Max Element in a BST
 int FindMax(struct node*root)
 {
 	if(root==NULL)
@@ -108,10 +134,10 @@ int main(void)
 	else
 		printf("\nNUMBER NOT FOUND\n\n");
 
-	data=FindMin(root);
+	data=FindMin_recursive(root);
 	printf("\n%d\n",data);
 
-	data=FindMax(root);
+	data=FindMax_recursive(root);
 	printf("\n%d\n",data);
 
 	return(0);
