@@ -61,7 +61,7 @@ int FindMin(struct node*root)
 	if(root==NULL)
 	{
 		printf("\nTree Empty\n");
-		return(-1);
+		return(-99);
 	}
 	while(root->left!=NULL){
 		root=root->left;
@@ -74,9 +74,9 @@ int FindMin_recursive(struct node*root)
 	if(root==NULL)
 	{
 		printf("\nTree Empty\n");
-		return(-1);
+		return(-99);
 	}
-	while(root->left==NULL)
+	if(root->left==NULL)
 		return(root->num);
 
 	FindMin_recursive(root->left);
@@ -89,13 +89,14 @@ int FindMax_recursive(struct node*root)
 		printf("\nTree empty\n");
 		return(-1);
 	}
-	while(root->right==NULL)
+	if(root->right==NULL)
 		return(root->num);
 
 	FindMax_recursive(root->right);
 }
 
 // Find Max Element in a BST
+
 int FindMax(struct node*root)
 {
 	if(root==NULL)
@@ -108,10 +109,60 @@ int FindMax(struct node*root)
 	}
 	return(root->num);
 }
+// Find the max num
+int max(int a,int b)
+{
+	if(a>=b)
+		return(a);
+	else
+		return(b);
+}
+
+// Find The Height of the Tree
+int FindHeight(struct node*root)
+{
+	if(root==NULL)
+		return(-1);
+	return(max(FindHeight(root->left),FindHeight(root->right))+1);
+}
+
+// LEVEL Order traversal DFS:
+// Inorder
+void Inorder(struct node*root)
+{
+	if(root==NULL)return;
+
+	if(root!=NULL)
+	{
+		Inorder(root->left);
+		printf("%d ",root->num);
+		Inorder(root->right);
+	}
+}
+// Pre-order
+void preorder(struct node*root)
+{
+	if(root==NULL)
+		return;
+
+		printf("%d ",root->num);
+		preorder(root->left);
+		preorder(root->right);
+}
+
+// Post-order
+void Postorder(struct node*root)
+{
+	if(root==NULL)
+		return;
+	Postorder(root->left);
+	Postorder(root->right);
+	printf("%d ",root->num);
+}
 
 int main(void)
 {
-	int search_var,data;
+	int search_var,data,height;
 	struct node*root=NULL;
 	root= insert(root,55);
 	root= insert(root,10);
@@ -139,6 +190,18 @@ int main(void)
 
 	data=FindMax_recursive(root);
 	printf("\n%d\n",data);
+
+	height= FindHeight(root);
+	printf("\nHeight of the tree is %d\n",height);
+
+	printf("\nInorder traversal is as:\n");
+	Inorder(root);
+
+	printf("\nPre-Order traversal is as:\n");
+	preorder(root);
+
+	printf("\nPost-Order traversal is as:\n");
+	Postorder(root);
 
 	return(0);
 }
