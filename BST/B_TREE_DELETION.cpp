@@ -124,7 +124,7 @@ struct node* Delete(struct node*root,int key)
 		}
 
 		// If root has two child
-		struct node*temp=Minvalue(root->right);
+		struct node*temp=Minvalue(root->right);					// Assign inorder successor to temp
 		root->num=temp->num;							// Make it the root
 		root->right=Delete(root->right,temp->num);		// Delete the inorder successor from BST
 	}
