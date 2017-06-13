@@ -78,7 +78,7 @@ int isBSTutil(struct node*root,int min,int max)
 	if(root->num < min || root->num > max)
 		return(0);
 
-	return(isBSTutil(root->left,min,root->num+1) && isBSTutil(root->right,root->num+1,max));
+	return(isBSTutil(root->left,min,root->num-1) && isBSTutil(root->right,root->num+1,max));
 }
 
 int isBST(struct node*root)
